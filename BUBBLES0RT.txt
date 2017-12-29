@@ -4,13 +4,13 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
-
+//this is a code block, everything inside gets tabulations
 struct node {
-int number;
-string name;
-node *next;
+	int number;
+	string name;
+	node *next;
 };
+//End of the code block
 bool isEmpty(node *head);
 void menu();
 void insert1(node *&head, node *&last, string name, int number);
@@ -20,27 +20,28 @@ void showList(node *current);
 void bubbleSort(struct node *head);
 void swap(struct node *a, struct node *b);
 
-
-
+//Function, it is a code block...
 bool isEmpty(node *head)
 {
-if(head == NULL)
-return true;
-else
-return false;
-
+	if(head == NULL)	//Next line depends of this, we add spaces
+		return true;		
+	else	//This line doesn't depend from above
+		return false;	//this depends from above line
 }
+//Code block ends...
+//now look: this is an idented function
 void menu() {
-cout << "Menu\n" ; //Menu
-cout << "1. Add the patient name.\n" ; //To add patient name
-cout << "2. Add patient number.\n" ; 
-cout << "3. Delete patient data.\n" ; 
-cout << "4. Display patient list.\n" ; 
-cout << "5. Sort by name.\n" ;
-cout << "6. Exit.\n" ; 
-//return choice;
+	cout << "Menu\n" ; //Menu
+	cout << "1. Add the patient name.\n" ; //To add patient name
+	cout << "2. Add patient number.\n" ; 
+	cout << "3. Delete patient data.\n" ; 
+	cout << "4. Display patient list.\n" ; 
+	cout << "5. Sort by name.\n" ;
+	cout << "6. Exit.\n" ; 
+	//return choice;
 }
 
+//this is not an idented function. 
 void insert1(node *&head, node *&last, string name,int number)
 {
 node *temp = new node;
@@ -50,25 +51,25 @@ temp->next= NULL;
 head = temp;
 last = temp;
 }
+//Next function have identation, always is easier to read...
 void insert2(node *&head, node *&last, string name, int number)
 { 
-if(isEmpty(head))
-{
-node *temp = new node;
-temp->number = number;
-temp->name = name;
-temp->next= NULL;
-}
-else
-{
-node *temp = new node;
-temp->number = number;
-temp->name = name;
-temp->next= NULL;
-last->next=temp;
-last = temp;
-}
-
+	if(isEmpty(head))
+	{
+		node *temp = new node;
+		temp->number = number;
+		temp->name = name;
+		temp->next= NULL;
+	}
+	else
+	{
+		node *temp = new node;
+		temp->number = number;
+		temp->name = name;
+		temp->next= NULL;
+		last->next=temp;
+		last = temp;
+	}
 }
 void remove(node *&head) 
 {
