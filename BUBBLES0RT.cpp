@@ -41,61 +41,42 @@ void menu() {
 	//return choice;
 }
 
-//this is not an idented function. 
-void insert1(node *&head, node *&last, string name,int number)
-{
-node *temp = new node;
-temp->number = number;
-temp->name = name;
-temp->next= NULL;
-head = temp;
-last = temp;
-}
 //Next function have identation, always is easier to read...
-void insert2(node *&head, node *&last, string name, int number)
-{ 
+void insertNode(node *&head, string name, int number) { 
+	node *temp = new node;
+	if(isEmpty(head)) {
+		temp->number = number;
+		temp->name = name;
+		temp->next = NULL;
+		head = temp;
+	} else {
+		temp->number = number;
+		temp->name = name;
+		temp->next = NULL;
+		head->next = temp;
+	}
+}
+void remove(node *&head) {
 	if(isEmpty(head))
-	{
-		node *temp = new node;
-		temp->number = number;
-		temp->name = name;
-		temp->next= NULL;
+		cout <<"This is already empty.\n" ;
+	else if (head == head) {
+		delete head;
+		head = NULL;
+	} else {
+		node *temp = head;
+		head = head ->next;
+		delete temp;
 	}
-	else
-	{
-		node *temp = new node;
-		temp->number = number;
-		temp->name = name;
-		temp->next= NULL;
-		last->next=temp;
-		last = temp;
-	}
-}
-void remove(node *&head) 
-{
-if(isEmpty(head))
-cout <<"This is already empty.\n" ;
-else if (head == head)
-{
-delete head;
-head = NULL;
-}
-else
-{
-node *temp = head;
-head = head ->next;
-delete temp;
-}
 }
 void showList(node *current) {
-if(isEmpty(current))
-cout << "This patient list is empty \n" ; 
-else 
-cout << "The patient list contains : \n" ; 
-while (current->next != NULL) 
-cout << current->number ;
-cout << current->name ;
-current = current-> next;
+	if(isEmpty(current))
+	cout << "This patient list is empty \n" ; 
+	else 
+	cout << "The patient list contains : \n" ; 
+	while (current->next != NULL) 
+	cout << current->number ;
+	cout << current->name ;
+	current = current-> next;
 }
 
 void bubbleSort(struct node *head)
@@ -136,51 +117,47 @@ void swap(struct node *a, struct node *b)
 }
 
 
-int main()
-{
-node *head = NULL;
-node *last = NULL;
-char choice;
-int number;
-string name;
-int running = 1;
-
-
-while (running) {
-menu();
-cin >> choice;
-cin.ignore();
-std::cout << "You selected " << choice << " option\n";
-switch(choice)
-{ 
-case '1': cout <<"Please enter patient name:" ;
-std::getline (std::cin, name);
-cout << "you entered " << name << " to the list\n";
-break;
-case '2': cout <<"Please enter a patient number:" ;
-std::getline (std::cin, name);
-cout << "you entered " << name << " to the list\n";
-//cin >> number;
-break;
-case '3': remove(head);
-	cout <<"You have removed the patient data" << choice << "option\n";
-break;
-case '4': showList(head);
-	cout <<"All the patient data";
-break;
-case '5': bubbleSort(head) ;
-	cout <<"Sort by patient name";
-case '6': 
-cout <<"System exit\n" ;
-running = 0;
-break;
-//default: cout << "sorry, what? (" << choice << ")\n";
-}
-if (name != "" && number > 0) {
-insert1(head, last, name, number);
-name = "";
-number = -1;
-}
-}
-return 0;
+int main() {
+	node *head = NULL;
+	node *last = NULL;	//I think this variable can disapear...
+	char choice;
+	int number;
+	string name;
+	int running = 1;
+	while (running) {
+		menu();
+		cin >> choice;
+		cin.ignore();
+		std::cout << "You selected " << choice << " option\n";
+		switch(choice) { 
+			case '1': cout <<"Please enter patient name:" ;
+			std::getline (std::cin, name);
+			cout << "you entered " << name << " to the list\n";
+			break;
+			case '2': cout <<"Please enter a patient number:" ;
+			std::getline (std::cin, name);
+			cout << "you entered " << name << " to the list\n";
+			//cin >> number;
+			break;
+			case '3': remove(head);
+				cout <<"You have removed the patient data" << choice << "option\n";
+			break;
+			case '4': showList(head);
+				cout <<"All the patient data";
+			break;
+			case '5': bubbleSort(head) ;
+				cout <<"Sort by patient name";
+			case '6': 
+			cout <<"System exit\n" ;
+			running = 0;
+			break;
+			//default: cout << "sorry, what? (" << choice << ")\n";
+		}
+		if (name != "" && number > 0) {
+			insertNode(head, name, number);
+			name = "";
+			number = -1;
+		}
+	}
+	return 0;
 }
