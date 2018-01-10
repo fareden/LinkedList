@@ -54,7 +54,13 @@ void insertNode(node *&head, string name, int number) {
 		temp->number = number;
 		temp->name = name;
 		temp->next = NULL;
-		head->next = temp;
+		//We need to find the tail of the list... otherwise we only can have two elements (the new element will repleace the last one)		
+		node *p = head;
+		//this loop will search the tail, it will follow the list until the next node is null
+		while (p->next != NULL)
+			p = p->next;
+		//now we just put the next element on the tail...
+		p->next = temp;
 	}
 }
 void remove(node *&head) {
